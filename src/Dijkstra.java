@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -48,46 +49,17 @@ public class Dijkstra {
 //			System.out.println(node.getAirlineCode());
 //		}
 //		System.out.println(dfsOutput.size());
-		
-		
-		List<Edge> allEdges = new ArrayList<>();
-		List<Edge> allEdgesWithDuplicates = new ArrayList<>();
-		//First sort the edges in the tree
-		Iterator<Node> iterator = nodes.values().iterator();
-		List<Node> vertices = new ArrayList<>();
-		while(iterator.hasNext()){
-			vertices.add(iterator.next());
+		List<Node> allNodes = new ArrayList<>();
+		while(nodes.keys().hasMoreElements()){
+			Node next = nodes.get(nodes.keys().nextElement());
+			allNodes.add(next);
 		}
 		
-		for (Node node : vertices) {
-			for (Edge edge : node.getEdges()) {
-				allEdgesWithDuplicates.add(edge);
-			}
-			
+		List<Edge> edges = s.getMinSpanTree(allNodes);
+		
+		for (Edge edge : edges) {
+			System.out.println(edge.getOrigin().getAirlineCode()+"-"+edge.getDestination().getAirlineCode());
 		}
-		
-		allEdgesWithDuplicates=s.mergeSort(allEdgesWithDuplicates);
-		
-		Edge tmp = null;
-		for (int i = 0; i < allEdgesWithDuplicates.size(); i++) {
-			Edge edge = allEdgesWithDuplicates.get(i);
-			if(tmp!=null&&!edge.getDestination().getAirlineCode().equalsIgnoreCase(tmp.getDestination().getAirlineCode())){
-				allEdges.add(edge);
-				System.out.println(edge.getOrigin().getAirlineCode()+"-"+edge.getDestination().getAirlineCode()+" "+edge.getWeight()+" "+edge.getAirlineCode());
-			}else if(tmp==null){
-				allEdges.add(edge);
-				System.out.println(edge.getOrigin().getAirlineCode()+"-"+edge.getDestination().getAirlineCode()+" "+edge.getWeight()+" "+edge.getAirlineCode());
-			}
-			tmp = allEdgesWithDuplicates.get(i);
-		}
-		
-		
-		
-//		for (RouteData routeData : routes) {
-//			if(routeData.getSourceCode().equalsIgnoreCase("KZN")){
-//				System.out.println(routeData.getSourceCode()+"-"+routeData.getDestinationCode());
-//			}
-//		}
 	}
 
 	public List<String> findShortestPath(Node orig,Node dest){
