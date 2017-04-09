@@ -64,35 +64,42 @@ public class Search {
 		}
 		return output;
 	}
-	
-	public List<Edge> getMinSpanTree(List<Node> vertices){
+
+	public List<Edge> getMinSpanTree(List<Node> vertices){ //Prims alghorihtm
 		NodeHeap queue = new NodeHeap(vertices.size());
-		List<Edge> result = new ArrayList<>();
-		Node root = vertices.get(0);
-		root.setCost(0f);
-		queue.enqueue(root);
+		List<Edge> result = new ArrayList<>(); //A = Ø
+		Node vertice = vertices.get(0);
+		vertice.setCost(0f); //KEY[r]=0
+		queue.enqueue(vertice);
 		for (Node node : vertices) {
-			node.setCost(99999999f); //set key to infinity
-			node.setParrent(null); //set parent to null
+			node.setCost(99999999f); //KEY[V] = infinity
+			node.setParrent(null); //PARENT[V] = null
+			queue.enqueue(node);
 		}
-		
-		while(!queue.isEmpty()){
-			Node u = queue.dequeue();
-			if(u.getParrent()!=null){
+
+		while(!queue.isEmpty()){ //Q!=Ø
+			Node u = queue.dequeue(); //u=min(Q) by KEY value, Q=Q-u
+			if(u.getParrent()!=null){ //if PARENT(u)!=null:
 				result.add(new Edge(u, u.getParrent(), u.getParrent().getCost()));
 			}
 			for (Edge edge : u.getEdges()) { //Note that if there are parallel edges it wont work
 				Node v = edge.getDestination();
-				//if()
+				if(edge.getWeight()<v.getCost()){
+					v.setParrent(u);
+					v.setCost(edge.getWeight());
+					if(edge.getWeight()<queue.getRoot().getCost()){
+						queue.swapRoot();
+					}else if(edge.getWeight()<queue.getSeccondVertice().getCost()){
+						queue.swapSeccond();
+					}
+				}
 			}
 		}
-		
-		
 		return result;
 	}
-	
+
 	public List<Edge> mergeSort(List<Edge> list){
-		
+
 		if(list.size()<=1){
 			return list;
 		}
@@ -134,7 +141,7 @@ public class Search {
 		}
 		return res;
 	}
-	
-	
+
+
 
 }

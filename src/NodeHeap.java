@@ -2,7 +2,7 @@ public class NodeHeap implements PriorityQueue<Node> {
 
 	private Node[] data;
 	private int size = 0;
-	
+
 	public NodeHeap(int capacity) {
 		data = new Node[capacity];
 	}
@@ -10,19 +10,19 @@ public class NodeHeap implements PriorityQueue<Node> {
 	@Override
 	public void enqueue(Node item) {
 		data[++size] = item;
-        int index = size;
-        while (parrentOf(index) > 0 && data[parrentOf(index)].compareTo(data[index]) > 0) {
-            swap(parrentOf(index), index);
-            index = parrentOf(index);
-        }
+		int index = size;
+		while (parrentOf(index) > 0 && data[parrentOf(index)].compareTo(data[index]) > 0) {
+			swap(parrentOf(index), index);
+			index = parrentOf(index);
+		}
 	}
 
 	@Override
 	public Node dequeue() {
 		Node removedNode = data[1];
-        data[1] = data[size--];
-        heapify(1);
-        return removedNode;
+		data[1] = data[size--];
+		heapify(1);
+		return removedNode;
 	}
 
 	@Override
@@ -75,7 +75,7 @@ public class NodeHeap implements PriorityQueue<Node> {
 			}
 		}
 	}
-	
+
 	public Node[] getData() {
 		return data;
 	}
@@ -83,31 +83,48 @@ public class NodeHeap implements PriorityQueue<Node> {
 	public void setData(Node[] data) {
 		this.data = data;
 	}
-	
-	public static void main(String[] args) {
-		NodeHeap nh = new NodeHeap(10);
-		
-		nh.enqueue(new Node(2f));
-		nh.enqueue(new Node(2f));
-		nh.enqueue(new Node(6f));
-		Node n_last = new Node(7f);
-		nh.enqueue(n_last);
-		nh.enqueue(new Node(8f));
-		//System.out.println(nh.getData()[2].getCost());
-		
-		n_last.setCost(1f);
-		nh.heapify(2);
-		if(n_last.getCost()>nh.getData()[0].getCost() || n_last.getCost()>nh.getData()[0].getCost()){
-			//nh.heapify(3);
-		}
-		//nh.updateNode(2);
-		//System.out.println(nh.size);
-		while (nh.size>0){
-			
-			//nh.dequeue();
-			System.out.println(nh.dequeue().getCost());
-		}
+
+	public Node getRoot(){
+		return this.data[1];
 	}
+	
+	public Node getSeccondVertice(){
+		return this.data[2];
+	}
+	
+	public void swapRoot(){
+		System.out.println("swaproot");
+		this.swap(1, 4);
+		this.swap(2, 4);
+	}
+	
+	public void swapSeccond(){
+		System.out.println("seccond");
+		this.swap(2,4);
+	}
+
+//	public static void main(String[] args) {
+//		NodeHeap nh = new NodeHeap(10);
+//
+//		nh.enqueue(new Node(100f));
+//		nh.enqueue(new Node(100f));
+//		nh.enqueue(new Node(100f));
+//		Node n_last = new Node(100f);
+//		nh.enqueue(n_last);
+//		nh.enqueue(new Node(100f));
+//		//System.out.println(nh.getData()[2].getCost());
+//
+//		float cost = 3.5f;
+//		n_last.setCost(cost);
+//
+//		//nh.updateNode(2);
+//		//System.out.println(nh.size);
+//		while (nh.size>0){
+//
+//			//nh.dequeue();
+//			System.out.println(nh.dequeue().getCost());
+//		}
+//	}
 
 
 }
