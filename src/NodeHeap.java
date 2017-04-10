@@ -93,38 +93,15 @@ public class NodeHeap implements PriorityQueue<Node> {
 	}
 	
 	public void swapRoot(){
-		System.out.println("swaproot");
+//		System.out.println("swaproot");
 		this.swap(1, 4);
 		this.swap(2, 4);
 	}
 	
 	public void swapSeccond(){
-		System.out.println("seccond");
+//		System.out.println("seccond");
 		this.swap(2,4);
 	}
-
-//	public static void main(String[] args) {
-//		NodeHeap nh = new NodeHeap(10);
-//
-//		nh.enqueue(new Node(100f));
-//		nh.enqueue(new Node(100f));
-//		nh.enqueue(new Node(100f));
-//		Node n_last = new Node(100f);
-//		nh.enqueue(n_last);
-//		nh.enqueue(new Node(100f));
-//		//System.out.println(nh.getData()[2].getCost());
-//
-//		float cost = 3.5f;
-//		n_last.setCost(cost);
-//
-//		//nh.updateNode(2);
-//		//System.out.println(nh.size);
-//		while (nh.size>0){
-//
-//			//nh.dequeue();
-//			System.out.println(nh.dequeue().getCost());
-//		}
-//	}
 
 
 }

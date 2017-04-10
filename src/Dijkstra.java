@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -50,10 +51,13 @@ public class Dijkstra {
 //		}
 //		System.out.println(dfsOutput.size());
 		List<Node> allNodes = new ArrayList<>();
-		while(nodes.keys().hasMoreElements()){
-			Node next = nodes.get(nodes.keys().nextElement());
+		Enumeration<String> keys = nodes.keys();
+		while(keys.hasMoreElements()){
+			Node next = nodes.get(keys.nextElement());
 			allNodes.add(next);
 		}
+		
+		//System.out.println(allNodes.size());
 		
 		List<Edge> edges = s.getMinSpanTree(allNodes);
 		

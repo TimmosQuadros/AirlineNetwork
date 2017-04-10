@@ -66,7 +66,7 @@ public class Search {
 	}
 
 	public List<Edge> getMinSpanTree(List<Node> vertices){ //Prims alghorihtm
-		NodeHeap queue = new NodeHeap(vertices.size());
+		NodeHeap queue = new NodeHeap(vertices.size()+2);
 		List<Edge> result = new ArrayList<>(); //A = Ø
 		Node vertice = vertices.get(0);
 		vertice.setCost(0f); //KEY[r]=0
